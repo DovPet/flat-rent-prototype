@@ -11,6 +11,7 @@ import { DateRangePicker, DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { useRouter } from "next/router";
+import { signIn, useSession, signOut } from "next-auth/react";
 
 function Header({ placeholder }) {
   const [searchInput, setSearchInput] = useState("");
@@ -19,6 +20,7 @@ function Header({ placeholder }) {
   const [endDate, setEndDate] = useState(new Date());
   const [handleShow, setHandleShow] = useState(false);
   const router = useRouter();
+  const { data: session } = useSession();
 
   const selectionRange = {
     startDate: startDate,
@@ -104,7 +106,19 @@ function Header({ placeholder }) {
         <GlobeAltIcon className="h-6 cursor-pointer" />
         <div className="flex border-2 rounded-full p-2 items-center space-x-2">
           <MenuIcon className="h-6 cursor-pointer" />
-          <UserCircleIcon className="h-6 cursor-pointer" />
+          {session?.user ? (
+            <img
+              src={session?.user?.image}
+              alt={session?.user?.name}
+              className="h-7 cursor-pointer rounded-full mr-[1.3rem]"
+              onClick={() => signOut()}
+            />
+          ) : (
+            <UserCircleIcon
+              onClick={session ? signOut : signIn}
+              className="h-6 cursor-pointer"
+            />
+          )}
         </div>
       </div>
 

@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { Home, Search, Heart, User } from "react-feather";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { signIn, useSession, signOut } from "next-auth/client";
+import { signIn, useSession, signOut } from "next-auth/react";
 import { UserCircleIcon } from "@heroicons/react/solid";
 
 export default function MobileNav() {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
-  const [session] = useSession();
+  const { data: session } = useSession();
 
   return (
     <MobileNavDiv className={isOpen ? "open" : null}>

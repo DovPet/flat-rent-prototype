@@ -7,8 +7,6 @@ import Image from "next/image";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 function Map(props) {
-  //Transform search results into {latitude:,logitude:
-
   const coordinates = props.searchResults.map((result) => ({
     longitude: result.long,
     latitude: result.lat,
