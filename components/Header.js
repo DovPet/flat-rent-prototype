@@ -107,6 +107,7 @@ function Header({ placeholder }) {
         <div className="flex border-2 rounded-full p-2 items-center space-x-2">
           <MenuIcon className="h-6 cursor-pointer" />
           {session?.user ? (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
               src={session?.user?.image}
               alt={session?.user?.name}

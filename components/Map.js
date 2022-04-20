@@ -20,32 +20,34 @@ function Map(props) {
     zoom: 12,
   });
   return (
-      <ReactMapGL
-        mapStyle="mapbox://styles/dovypetr/cl1m9umug000w14o70yifei3d"
-        mapboxApiAccessToken={process.env.mapbox_key}
-        {...viewport}
-        width="100%"
-        height="100%"
-        onViewportChange={(viewport) => setViewport(viewport)}
-        className=" sticky z-0 bottom-0"
-        style={{
-          marginBottom: "-40vh",
-          backgroundImage: "linearGradient(red, yellow)",
-        }}
-      >
-        {props.searchResults.map((result) => (
-          <div key={result.long}>
-            <Marker
-              longitude={result.long}
-              latitude={result.lat}
-              offsetLeft={-10}
-              offsetTop={-10}
+    <ReactMapGL
+      mapStyle="mapbox://styles/dovypetr/cl1m9umug000w14o70yifei3d"
+      mapboxApiAccessToken={process.env.mapbox_key}
+      {...viewport}
+      width="100%"
+      height="100%"
+      onViewportChange={(viewport) => setViewport(viewport)}
+      className=" sticky z-0 bottom-0"
+      style={{
+        marginBottom: "-40vh",
+        backgroundImage: "linearGradient(red, yellow)",
+      }}
+    >
+      {props.searchResults.map((result) => (
+        <div key={result.long}>
+          <Marker
+            longitude={result.long}
+            latitude={result.lat}
+            offsetLeft={-10}
+            offsetTop={-10}
+          >
+            <p
+              onClick={() => setSelectedLocation(result)}
+              className="cursor-pointer rounded-md w-10 pl-1 hover:animate-bounce "
+              aria-label="push-pin"
             >
-              <p
-                onClick={() => setSelectedLocation(result)}
-                className="cursor-pointer      rounded-md w-10 pl-1 hover:animate-bounce "
-                aria-label="push-pin"
-              >
+              {
+                // eslint-disable-next-line @next/next/no-img-element
                 <img
                   onClick={() => {
                     setSelectedLocation(result);
@@ -54,50 +56,51 @@ function Map(props) {
                   className={"h-8 cursor-pointer z-1"}
                   alt=""
                 />
-              </p>
-            </Marker>
-            {selectedLocation.long === result.long ? (
-              <Popup
-                onClose={() => setSelectedLocation({})}
-                closeOnClick={true}
-                latitude={result.lat}
-                longitude={result.long}
-                className="rounded-2xl z-150"
-              >
-                <div className="p-3 min-w-[300px]  relative z-50 rounded-2xl">
-                  <div className="image_wrapper">
-                    <Image
-                      src={result.img}
-                      loading="lazy"
-                      className="w-full object-cover z-50 h-48 rounded-lg mb-3 image"
-                      alt=""
-                      height={192}
-                      width={192}
-                    />
-                  </div>
-                  <h3 className="text-lg font-medium text-black mb-2">
-                    {result.title}
-                  </h3>
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <p className="text-xl text-black font-semibold">
-                        {result.price}
-                      </p>
-                      <p className="cursor-pointer flex items-center">
-                        <StarIcon className="h-5 text-yellow-500 mr-1" />
-                        {result.star}
-                      </p>
-                    </div>
-                    <HeartIcon className="cursor-pointer h-7 text-red-600" />
-                  </div>
+              }
+            </p>
+          </Marker>
+          {selectedLocation.long === result.long ? (
+            <Popup
+              onClose={() => setSelectedLocation({})}
+              closeOnClick={true}
+              latitude={result.lat}
+              longitude={result.long}
+              className="rounded-2xl z-150"
+            >
+              <div className="p-3 min-w-[300px]  relative z-50 rounded-2xl">
+                <div className="image_wrapper">
+                  <Image
+                    src={result.img}
+                    loading="lazy"
+                    className="w-full object-cover z-50 h-48 rounded-lg mb-3 image"
+                    alt=""
+                    height={192}
+                    width={192}
+                  />
                 </div>
-              </Popup>
-            ) : (
-              false
-            )}
-          </div>
-        ))}
-      </ReactMapGL>
+                <h3 className="text-lg font-medium text-black mb-2">
+                  {result.title}
+                </h3>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <p className="text-xl text-black font-semibold">
+                      {result.price}
+                    </p>
+                    <p className="cursor-pointer flex items-center">
+                      <StarIcon className="h-5 text-yellow-500 mr-1" />
+                      {result.star}
+                    </p>
+                  </div>
+                  <HeartIcon className="cursor-pointer h-7 text-red-600" />
+                </div>
+              </div>
+            </Popup>
+          ) : (
+            false
+          )}
+        </div>
+      ))}
+    </ReactMapGL>
   );
 }
 
