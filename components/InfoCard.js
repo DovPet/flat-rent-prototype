@@ -12,11 +12,9 @@ function InfoCard({ image, location, title, description, star, price, total }) {
   const items = useSelector(selectItems);
   const { data: session } = useSession();
   const dispatch = useDispatch();
-
   const stripePromise = loadStripe(process.env.stripe_public_key);
-
   const isItemAddedForBooking = items.find((i) => i.image == image);
-  console.log(isItemAddedForBooking);
+
   const continueToBooking = async () => {
     dispatch(
       bookNow({
