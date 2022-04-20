@@ -35,19 +35,20 @@ export default function MobileNav() {
         <div className="item">
           <Heart /> Wishlist
         </div>
-        <div className="item">
+        <div
+          className="item"
+          onClick={() => {
+            session ? signOut() : signIn();
+          }}
+        >
           {session?.user ? (
             <img
               src={session?.user?.image}
               alt={session?.user?.name}
               className="h-7 cursor-pointer rounded-full mr-[1.3rem]"
-              onClick={() => signOut()}
             />
           ) : (
-            <UserCircleIcon
-              className="h-7 cursor-pointer"
-              onClick={() => router.push("/signin")}
-            />
+            <UserCircleIcon className="h-7 cursor-pointer" />
           )}
           Profile
         </div>

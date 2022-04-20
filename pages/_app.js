@@ -3,6 +3,8 @@ import ProgressBar from "@badrap/bar-of-progress";
 import Router from "next/router";
 import { AnimatePresence } from "framer-motion";
 import { SessionProvider } from "next-auth/react";
+import { Provider } from "react-redux";
+import { store } from "../app/store";
 
 const progress = new ProgressBar({
   size: 4,
@@ -19,7 +21,9 @@ function MyApp({ Component, pageProps }) {
   return (
     <AnimatePresence>
       <SessionProvider session={pageProps.session}>
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </SessionProvider>
     </AnimatePresence>
   );
