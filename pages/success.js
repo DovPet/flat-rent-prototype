@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import Head from "next/head";
 import { removeAllStays } from "../slices/bookingSlice";
 
-function success() {
+const Success = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     localStorage.setItem("state", JSON.stringify([]));
@@ -24,20 +24,17 @@ function success() {
           <div className="flex items-center space-x-2 mb-5 self-center">
             <CheckCircleIcon className="text-green-500 h-10" />
             <h1 className="text-3xl">
-            Thank you, your location has been successfully booked!
+              Thank you, your location has been successfully booked!
             </h1>
           </div>
           <p>Thank you for your shopping</p>
-          <button
-            onClick={() => router.push("/")}
-            className="button mt-8"
-          >
+          <button onClick={() => router.push("/")} className="button mt-8">
             Go to main page
           </button>
         </div>
       </main>
     </div>
   );
-}
+};
 
 export default success;
