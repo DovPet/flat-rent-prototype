@@ -29,6 +29,7 @@ export default async (req, res) => {
         cancel_url: `${process.env.HOST}`,
       })
       .catch((err) => res.status(500).json({ error: err.message }));
-    res.status(200).json({ id: session.id });
+      console.log(session)
+    res.status(200).json({ id: session?.id });
   }
 };
