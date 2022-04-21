@@ -1,6 +1,4 @@
-const stripe = require("stripe")(
-  "sk_test_51Kqf1rGYGMOM8vlYK1FNsoVYBv8ojUsNdp3LtlgQrLS8ekY6TLLAw0BoTb3P3orwwWY3S4epsjMUuSismwjGeDw700m18VhngJ"
-);
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 export default async (req, res) => {
   if (req.method == "POST") {
@@ -29,6 +27,6 @@ export default async (req, res) => {
         cancel_url: `${process.env.HOST}`,
       })
       .catch((err) => res.status(500).json({ error: err.message }));
-    res.status(200).json({ id: session?.id });
+    res.status(200).json({ id: session.id });
   }
 };
