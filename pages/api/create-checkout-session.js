@@ -28,8 +28,10 @@ export default async (req, res) => {
         success_url: `${process.env.HOST}/success`,
         cancel_url: `${process.env.HOST}`,
       })
-      .catch((err) => res.status(500).json({ error: err.message }));
-      console.log(session)
+      .catch((err) => {
+        console.log(session)
+        res.status(500).json({ error: err.message });
+      });
     res.status(200).json({ id: session?.id });
   }
 };
