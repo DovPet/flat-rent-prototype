@@ -12,7 +12,9 @@ function InfoCard({ image, location, title, description, star, price, total }) {
   const items = useSelector(selectItems);
   const { data: session } = useSession();
   const dispatch = useDispatch();
-  const stripePromise = loadStripe(process.env.stripe_public_key);
+  const stripePromise = loadStripe(
+    "pk_test_51Kqf1rGYGMOM8vlYBWF1iGJpNW8m2OkncWZlCwkB7fhba6rXdlV2u3qaENuN33E3KCUMyVNIMlgPZufTwRtapot000JWsynGBe"
+  );
   const isItemAddedForBooking = items.find((i) => i.image == image);
 
   const continueToBooking = async () => {
